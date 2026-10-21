@@ -6,6 +6,7 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 import java.math.BigDecimal;
+import java.time.Instant;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -36,6 +37,16 @@ public class Produto {
     @Column(nullable = false)
     private Integer quantidade;
 
+    @Column(nullable = true, updatable = false)
+    private Instant criadoEm;
+
+    @PrePersist
+    private void definirDataCriacao() {
+        if (criadoEm == null) {
+            criadoEm = Instant.now();
+        }
+    }
+
     public static Produto toEntity(ProdutoRequestDTO produtoRequestDTO) {
         Produto produto = new Produto();
         produto.setNome(produtoRequestDTO.nome());
@@ -43,6 +54,7 @@ public class Produto {
         produto.setPreco(produtoRequestDTO.preco());
         produto.setCategoria(produtoRequestDTO.categoria());
         produto.setImagem(produtoRequestDTO.imagem());
+        produto.setQuantidade(produtoRequestDTO.quantidade());
         return produto;
     }
 }

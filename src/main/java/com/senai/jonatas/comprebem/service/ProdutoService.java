@@ -5,9 +5,11 @@ import com.senai.jonatas.comprebem.dto.ProdutoResponseDTO;
 import com.senai.jonatas.comprebem.entity.Produto;
 import com.senai.jonatas.comprebem.repository.ProdutoRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -17,9 +19,8 @@ public class ProdutoService {
 
     private final ProdutoRepository produtoRepository;
 
-    public List<ProdutoResponseDTO> findAll() {
-        return produtoRepository.findAll()
-                .stream()
+    public List<ProdutoResponseDTO> findAll(Pageable pageable) {
+        return produtoRepository.findAll(inInsertionOrder(pageable)).stream()
                 .map(ProdutoResponseDTO::toDto)
                 .toList();
     }
@@ -31,11 +32,15 @@ public class ProdutoService {
         return ProdutoResponseDTO.toDto(produto);
     }
 
-    public List<ProdutoResponseDTO> findByFiltro(String filtro) {
-        return produtoRepository.findByFiltro(filtro)
-                .stream()
+    public List<ProdutoResponseDTO> findByFiltro(String filtro, Pageable pageable) {
+        return produtoRepository.findByFiltro(filtro, inInsertionOrder(pageable)).stream()
                 .map(ProdutoResponseDTO::toDto)
                 .toList();
+    }
+
+    private Pageable inInsertionOrder(Pageable pageable) {
+        return PageRequest.of(pageable.getPageNumber(), pageable.getPageSize(),
+                Sort.by(Sort.Direction.ASC, "criadoEm"));
     }
 
     public ProdutoResponseDTO save(ProdutoRequestDTO produto) {
@@ -56,6 +61,7 @@ public class ProdutoService {
         produtoExistente.setPreco(produto.preco());
         produtoExistente.setCategoria(produto.categoria());
         produtoExistente.setImagem(produto.imagem());
+        produtoExistente.setQuantidade(produto.quantidade());
 
         Produto produtoAtualizado = produtoRepository.save(produtoExistente);
         return ProdutoResponseDTO.toDto(produtoAtualizado);

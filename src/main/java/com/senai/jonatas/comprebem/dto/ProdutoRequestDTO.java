@@ -1,12 +1,16 @@
 package com.senai.jonatas.comprebem.dto;
 
 import java.math.BigDecimal;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.PositiveOrZero;
 
 public record ProdutoRequestDTO(
-        String nome,
+        @NotBlank String nome,
         String descricao,
-        BigDecimal preco,
+        @NotNull BigDecimal preco,
         String categoria,
-        String imagem
+        String imagem,
+        @NotNull @PositiveOrZero Integer quantidade
 ) {
 }
