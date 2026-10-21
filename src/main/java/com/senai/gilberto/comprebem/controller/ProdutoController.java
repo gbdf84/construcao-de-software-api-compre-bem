@@ -1,8 +1,8 @@
-package com.senai.jonatas.comprebem.controller;
+package com.senai.gilberto.comprebem.controller;
 
-import com.senai.jonatas.comprebem.dto.ProdutoRequestDTO;
-import com.senai.jonatas.comprebem.dto.ProdutoResponseDTO;
-import com.senai.jonatas.comprebem.service.ProdutoService;
+import com.senai.gilberto.comprebem.dto.ProdutoRequestDTO;
+import com.senai.gilberto.comprebem.dto.ProdutoResponseDTO;
+import com.senai.gilberto.comprebem.service.ProdutoService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;

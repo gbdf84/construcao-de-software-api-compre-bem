@@ -1,6 +1,6 @@
-package com.senai.jonatas.comprebem.repository;
+package com.senai.gilberto.comprebem.repository;
 
-import com.senai.jonatas.comprebem.entity.Produto;
+import com.senai.gilberto.comprebem.entity.Produto;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;

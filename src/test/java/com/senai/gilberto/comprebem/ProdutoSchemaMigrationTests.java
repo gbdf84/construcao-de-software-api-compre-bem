@@ -1,7 +1,7 @@
-package com.senai.jonatas.comprebem;
+package com.senai.gilberto.comprebem;
 
-import com.senai.jonatas.comprebem.entity.Produto;
-import com.senai.jonatas.comprebem.repository.ProdutoRepository;
+import com.senai.gilberto.comprebem.entity.Produto;
+import com.senai.gilberto.comprebem.repository.ProdutoRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;

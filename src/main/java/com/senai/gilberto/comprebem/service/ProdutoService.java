@@ -1,9 +1,9 @@
-package com.senai.jonatas.comprebem.service;
+package com.senai.gilberto.comprebem.service;
 
-import com.senai.jonatas.comprebem.dto.ProdutoRequestDTO;
-import com.senai.jonatas.comprebem.dto.ProdutoResponseDTO;
-import com.senai.jonatas.comprebem.entity.Produto;
-import com.senai.jonatas.comprebem.repository.ProdutoRepository;
+import com.senai.gilberto.comprebem.dto.ProdutoRequestDTO;
+import com.senai.gilberto.comprebem.dto.ProdutoResponseDTO;
+import com.senai.gilberto.comprebem.entity.Produto;
+import com.senai.gilberto.comprebem.repository.ProdutoRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;

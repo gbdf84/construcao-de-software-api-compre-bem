@@ -1,8 +1,8 @@
-package com.senai.jonatas.comprebem;
+package com.senai.gilberto.comprebem;
 
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
-import com.senai.jonatas.comprebem.entity.Produto;
-import com.senai.jonatas.comprebem.repository.ProdutoRepository;
+import com.senai.gilberto.comprebem.entity.Produto;
+import com.senai.gilberto.comprebem.repository.ProdutoRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

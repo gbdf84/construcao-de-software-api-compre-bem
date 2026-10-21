@@ -1,6 +1,6 @@
-package com.senai.jonatas.comprebem.dto;
+package com.senai.gilberto.comprebem.dto;
 
-import com.senai.jonatas.comprebem.entity.Produto;
+import com.senai.gilberto.comprebem.entity.Produto;
 
 import java.math.BigDecimal;
 import java.util.UUID;

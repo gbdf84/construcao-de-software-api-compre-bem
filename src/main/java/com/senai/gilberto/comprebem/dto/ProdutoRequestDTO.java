@@ -1,4 +1,4 @@
-package com.senai.jonatas.comprebem.dto;
+package com.senai.gilberto.comprebem.dto;
 
 import java.math.BigDecimal;
 import jakarta.validation.constraints.NotBlank;
