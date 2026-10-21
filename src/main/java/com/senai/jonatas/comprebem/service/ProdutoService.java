@@ -5,10 +5,12 @@ import com.senai.jonatas.comprebem.dto.ProdutoResponseDTO;
 import com.senai.jonatas.comprebem.entity.Produto;
 import com.senai.jonatas.comprebem.repository.ProdutoRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 import java.util.UUID;
@@ -26,14 +28,19 @@ public class ProdutoService {
     }
 
     public ProdutoResponseDTO findById(UUID id) {
-        var produto = produtoRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Produto não encontrado"));
-
+        Produto produto = produtoRepository.findById(id)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Produto não encontrado"));
         return ProdutoResponseDTO.toDto(produto);
     }
 
     public List<ProdutoResponseDTO> findByFiltro(String filtro, Pageable pageable) {
         return produtoRepository.findByFiltro(filtro, inInsertionOrder(pageable)).stream()
+                .map(ProdutoResponseDTO::toDto)
+                .toList();
+    }
+
+    public List<ProdutoResponseDTO> findByNome(String busca, Pageable pageable) {
+        return produtoRepository.findByNomeContainingIgnoreCase(busca, inInsertionOrder(pageable)).stream()
                 .map(ProdutoResponseDTO::toDto)
                 .toList();
     }
@@ -54,7 +61,7 @@ public class ProdutoService {
 
     public ProdutoResponseDTO update(UUID produtoId, ProdutoRequestDTO produto) {
         Produto produtoExistente = produtoRepository.findById(produtoId)
-                .orElseThrow(() -> new RuntimeException("Produto não encontrado"));
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Produto não encontrado"));
 
         produtoExistente.setNome(produto.nome());
         produtoExistente.setDescricao(produto.descricao());
@@ -63,8 +70,6 @@ public class ProdutoService {
         produtoExistente.setImagem(produto.imagem());
         produtoExistente.setQuantidade(produto.quantidade());
 
-        Produto produtoAtualizado = produtoRepository.save(produtoExistente);
-        return ProdutoResponseDTO.toDto(produtoAtualizado);
-
+        return ProdutoResponseDTO.toDto(produtoRepository.save(produtoExistente));
     }
 }

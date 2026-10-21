@@ -14,4 +14,6 @@ public interface ProdutoRepository extends JpaRepository<Produto, UUID> {
 
     @Query("SELECT p FROM Produto p WHERE p.nome LIKE %:filtro% OR p.descricao LIKE %:filtro%")
     Page<Produto> findByFiltro(String filtro, Pageable pageable);
+
+    Page<Produto> findByNomeContainingIgnoreCase(String nome, Pageable pageable);
 }
